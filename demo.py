@@ -26,4 +26,3 @@ graph.write_png('mydecisiontree.png')
 img=pltimg.imread('mydecisiontree.png')
 imgplot = plt.imshow(img)
 plt.show()
-
