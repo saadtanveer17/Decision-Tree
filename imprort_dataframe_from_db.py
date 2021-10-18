@@ -3,24 +3,31 @@ import pymongo
 import pandas as pd
 from bson.json_util import loads, dumps
 
-# Connecting to Database server
-client = pymongo.MongoClient('mongodb://mongodb:mongodb@172.22.0.3:27017/')
 
-# Accessing db
-db = client.demo_db
+def import_dataframe(db_address):
+    # Connecting to Database server
+    client = pymongo.MongoClient(db_address)
 
-# Accessing collection
-collection = db.demo_data
+    # Accessing db
+    db = client.demo_db
 
-# Now creating a Cursor instance using find() function
-cursor = collection.find()
+    # Accessing collection
+    collection = db.demo_data
 
-# Converting cursor to the list of dictionaries
-list_cur = list(cursor)
+    # Now creating a Cursor instance using find() function
+    cursor = collection.find()
 
-# Converting to the JSON
-json_data = dumps(list_cur, indent = 2) 
+    # Converting cursor to the list of dictionaries
+    list_cur = list(cursor)
 
-print(json_data)
-df = pd.read_json(json_data)
-print(df)
+    # Converting to the JSON
+    json_data = dumps(list_cur, indent = 2) 
+
+    print(json_data)
+    df = pd.read_json(json_data)
+    print(df)
+    return df
+
+
+db_address = 'mongodb://mongodb:mongodb@172.22.0.3:27017/'
+import_dataframe(db_address)
