@@ -8,12 +8,12 @@ def connect_to_db(db_address):
     # Connecting to Database server
     return pymongo.MongoClient(db_address)
 
-def import_dataframe(client):
+def import_dataframe(client, db_name, collection_name):
     # Accessing db
-    db = client.demo_db
+    db = client[db_name]
 
     # Accessing collection
-    collection = db.demo_data
+    collection = db[collection_name]
 
     # Now creating a Cursor instance using find() function
     cursor = collection.find()
@@ -31,5 +31,7 @@ def import_dataframe(client):
 
 
 db_address = 'mongodb://mongodb:mongodb@172.22.0.3:27017/'
+db_name = 'demo_db'
+collection_name = 'demo_data'
 client = connect_to_db(db_address)
-import_dataframe(client)
+import_dataframe(client, db_name, collection_name)
