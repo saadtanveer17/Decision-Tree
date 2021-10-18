@@ -4,10 +4,11 @@ import pandas as pd
 from bson.json_util import loads, dumps
 
 
-def import_dataframe(db_address):
+def connect_to_db(db_address):
     # Connecting to Database server
-    client = pymongo.MongoClient(db_address)
+    return pymongo.MongoClient(db_address)
 
+def import_dataframe(client):
     # Accessing db
     db = client.demo_db
 
@@ -30,4 +31,5 @@ def import_dataframe(db_address):
 
 
 db_address = 'mongodb://mongodb:mongodb@172.22.0.3:27017/'
-import_dataframe(db_address)
+client = connect_to_db(db_address)
+import_dataframe(client)
