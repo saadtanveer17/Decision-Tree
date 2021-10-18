@@ -3,3 +3,4 @@ tree
 pydotplus
 sklearn-pandas
 matplotlib
+pymongo
