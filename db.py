@@ -40,10 +40,10 @@ def import_dataframe(client, db_name, collection_name):
     return df
 
 
-db_address = 'mongodb://mongodb:mongodb@172.22.0.3:27017/'
-db_name = 'demo_db'
-csv_file_name = 'shows.csv'
-collection_name = 'demo_data'
-client = connect_to_db(db_address)
+# db_address = 'mongodb://mongodb:mongodb@172.22.0.3:27017/'
+# db_name = 'demo_db'
+# csv_file_name = 'shows.csv'
+# collection_name = 'demo_data'
+# client = connect_to_db(db_address)
 # export_dataframe(client, db_name, collection_name, csv_file_name)
-import_dataframe(client, db_name, collection_name)
+# import_dataframe(client, db_name, collection_name)

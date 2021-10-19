@@ -13,6 +13,7 @@ db_address = 'mongodb://mongodb:mongodb@172.22.0.3:27017/'
 db_name = 'demo_db'
 collection_name = 'demo_data'
 client = db.connect_to_db(db_address)
+# db.export_dataframe(client, db_name, collection_name, csv_file_name)
 df = db.import_dataframe(client, db_name, collection_name)
 
 print(df)

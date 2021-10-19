@@ -1,5 +1,3 @@
-pandas
-tree
 pydotplus
 sklearn-pandas
 matplotlib
