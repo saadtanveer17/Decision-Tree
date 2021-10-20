@@ -42,10 +42,10 @@ class DB(object):
         collection.remove({})
 
     def import_db(self):
-        print(self.import_dataframe(self.client, self.db_name, self.collection_name))
+        return self.import_dataframe(self.client, self.db_name, self.collection_name)
 
     def export_db(self):
-        print(self.export_dataframe(self.client, self.db_name, self.collection_name, self.csv_file_name))
+        return self.export_dataframe(self.client, self.db_name, self.collection_name, self.csv_file_name)
 
     def clear_db(self):
-        print(self.clear_collection())
+        return self.clear_collection()
