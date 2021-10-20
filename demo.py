@@ -29,7 +29,7 @@ class SmartDecisionTreeClassifier(object):
     def extract_column_features(self):
         df_np = self.df.columns.to_numpy()
         self.features = df_np[1:-1]
-        print(self.features)
+        # print(self.features)
 
     def prepare_data(self):
         self.X = self.df[self.features]
