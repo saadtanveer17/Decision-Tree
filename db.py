@@ -18,35 +18,28 @@ class DB(object):
         print('Yo!!!')
 
     def export_dataframe(self ,client, db_name, collection_name, csv_file_name):
-        # Accessing db
-        db = client[db_name]
-
-        # Accessing collection
-        collection = db[collection_name]
+        
+        db = client[db_name]    # Accessing db
+        collection = db[collection_name]    # Accessing collection
         df = pandas.read_csv(csv_file_name)
         df_json = df.to_dict('records') 
         collection.insert_many(df_json)
 
     def import_dataframe(self, client, db_name, collection_name):
-        # Accessing db
         db = client[db_name]
-
-        # Accessing collection
         collection = db[collection_name]
-
-        # Now creating a Cursor instance using find() function
-        cursor = collection.find()
-
-        # Converting cursor to the list of dictionaries
-        list_cur = list(cursor)
-
-        # Converting to the JSON
-        json_data = dumps(list_cur, indent = 2) 
-
+        cursor = collection.find() # Now creating a Cursor instance using find() function
+        list_cur = list(cursor) # Converting cursor to the list of dictionaries
+        json_data = dumps(list_cur, indent = 2) # Converting to the JSON
         # print(json_data)
-        df = pandas.read_json(json_data)
+        self.df = pandas.read_json(json_data)
         # print(df)
-        return df
+        return self.df
+
+    def clear_collection(self):
+        db = self.client[self.db_name]
+        collection = db[self.collection_name]
+        collection.remove({})
 
     def import_db(self):
         print(self.import_dataframe(self.client, self.db_name, self.collection_name))
@@ -54,12 +47,5 @@ class DB(object):
     def export_db(self):
         print(self.export_dataframe(self.client, self.db_name, self.collection_name, self.csv_file_name))
 
-
-if __name__ == '__main__':
-    db_address = 'mongodb://mongodb:mongodb@172.22.0.2:27017/'
-    db_name = 'demo_db'
-    csv_file_name = 'shows.csv'
-    collection_name = 'demo_data'
-    obj = DB(db_address, db_name, collection_name, csv_file_name)
-    # obj.export_db()
-    obj.import_db()
+    def clear_db(self):
+        print(self.clear_collection())
